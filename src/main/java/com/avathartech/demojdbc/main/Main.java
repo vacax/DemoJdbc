@@ -1,8 +1,11 @@
 package com.avathartech.demojdbc.main;
 
 import com.avathartech.demojdbc.encapsulacion.Estudiante;
+import com.avathartech.demojdbc.services.BootStrapServices;
 import com.avathartech.demojdbc.services.EstudianteServices;
+import jdk.nashorn.internal.runtime.linker.Bootstrap;
 
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -11,11 +14,30 @@ import java.util.List;
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
+        //Iniciando el servicio
+        BootStrapServices.startDb();
 
+        //
         EstudianteServices estudianteServices = new EstudianteServices();
+
+        //Creando la tabla de no existir.
+        estudianteServices.crearTabla();
+
+        //Prueba de Conexión.
         estudianteServices.testConexion();
+
+        //Insertando
+        Estudiante insertar = new Estudiante();
+        insertar.setMatricula(20011136);
+        insertar.setNombre("Carlos");
+        insertar.setApellido("Camacho");
+        insertar.setTelefono("849-220-6409");
+        insertar.setCarrera("ISC");
+        if(estudianteServices.getEstudiante(insertar.getMatricula())==null){
+            estudianteServices.crearEstudiante(insertar);
+        }
 
         List<Estudiante> listaEstudiantes = estudianteServices.listaEstudiantes();
         System.out.println("La cantidad de estudiantes: "+listaEstudiantes.size());
@@ -23,22 +45,11 @@ public class Main {
             System.out.println("La matricula: "+est.getMatricula());
         }
 
-        Estudiante estudiante = estudianteServices.getEstudiante(200111136);
+        Estudiante estudiante = estudianteServices.getEstudiante(20011136);
         if(estudiante!=null){
             System.out.println("El nombre es: "+estudiante.getNombre());
         }else{
             System.out.println("No exite el usuario consultado");
-        }
-
-        //Insertando
-        Estudiante insertar = new Estudiante();
-        insertar.setMatricula(99999);
-        insertar.setNombre("Otro");
-        insertar.setApellido("Otro");
-        insertar.setTelefono("4545");
-        insertar.setCarrera("ISC");
-        if(estudianteServices.getEstudiante(insertar.getMatricula())==null){
-            estudianteServices.crearEstudiante(insertar);
         }
 
         //Actualizando
@@ -47,5 +58,8 @@ public class Main {
 
         //Eleminando...
         estudianteServices.borrarEstudiante(insertar.getMatricula());
+
+        //Parando el servicio
+        BootStrapServices.stopDb();
     }
 }

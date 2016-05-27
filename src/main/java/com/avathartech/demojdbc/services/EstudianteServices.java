@@ -14,6 +14,8 @@ import java.util.logging.Logger;
  */
 public class EstudianteServices {
 
+    private String URL = "jdbc:h2:tcp://localhost/~/pruebaTep";
+
     public EstudianteServices() {
         registrarDriver();
     }
@@ -30,10 +32,9 @@ public class EstudianteServices {
     }
 
     private Connection getConexion() {
-        String url = "jdbc:h2:tcp://localhost/~/pruebaTep";
         Connection con = null;
         try {
-            con = DriverManager.getConnection(url, "sa", "");
+            con = DriverManager.getConnection(URL, "sa", "");
         } catch (SQLException ex) {
             Logger.getLogger(EstudianteServices.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -47,6 +48,26 @@ public class EstudianteServices {
         } catch (SQLException ex) {
             Logger.getLogger(EstudianteServices.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    /**
+     *
+     * @throws SQLException
+     */
+    public void crearTabla() throws  SQLException{
+        String sql = "CREATE TABLE IF NOT EXISTS ESTUDIANTE\n" +
+                "(\n" +
+                "  MATRICULA INTEGER PRIMARY KEY NOT NULL,\n" +
+                "  NOMBRE VARCHAR(100) NOT NULL,\n" +
+                "  APELLIDO VARCHAR(100) NOT NULL,\n" +
+                "  TELEFONO VARCHAR(25) NOT NULL,\n" +
+                "  CARRERA VARCHAR(50) NOT NULL\n" +
+                ");";
+        Connection con = getConexion();
+        Statement statement = con.createStatement();
+        statement.execute(sql);
+        statement.close();
+        con.close();
     }
 
     public List<Estudiante> listaEstudiantes() {
