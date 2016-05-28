@@ -16,6 +16,7 @@ public class Estudiante {
         return matricula;
     }
 
+
     public void setMatricula(int matricula) {
         this.matricula = matricula;
     }

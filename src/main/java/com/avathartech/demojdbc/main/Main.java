@@ -2,8 +2,8 @@ package com.avathartech.demojdbc.main;
 
 import com.avathartech.demojdbc.encapsulacion.Estudiante;
 import com.avathartech.demojdbc.services.BootStrapServices;
+import com.avathartech.demojdbc.services.DataBaseServices;
 import com.avathartech.demojdbc.services.EstudianteServices;
-import jdk.nashorn.internal.runtime.linker.Bootstrap;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -19,14 +19,12 @@ public class Main {
         //Iniciando el servicio
         BootStrapServices.startDb();
 
+        //Prueba de Conexión.
+        DataBaseServices.getInstancia().testConexion();
+
+        BootStrapServices.crearTablas();
         //
         EstudianteServices estudianteServices = new EstudianteServices();
-
-        //Creando la tabla de no existir.
-        estudianteServices.crearTabla();
-
-        //Prueba de Conexión.
-        estudianteServices.testConexion();
 
         //Insertando
         Estudiante insertar = new Estudiante();

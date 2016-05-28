@@ -14,61 +14,6 @@ import java.util.logging.Logger;
  */
 public class EstudianteServices {
 
-    private String URL = "jdbc:h2:tcp://localhost/~/pruebaTep";
-
-    public EstudianteServices() {
-        registrarDriver();
-    }
-
-    /**
-     * Metodo para el registro de driver de conexión.
-     */
-    private void registrarDriver() {
-        try {
-            Class.forName("org.h2.Driver");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(EstudianteServices.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private Connection getConexion() {
-        Connection con = null;
-        try {
-            con = DriverManager.getConnection(URL, "sa", "");
-        } catch (SQLException ex) {
-            Logger.getLogger(EstudianteServices.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return con;
-    }
-
-    public void testConexion() {
-        try {
-            getConexion().close();
-            System.out.println("Conexión realizado con exito...");
-        } catch (SQLException ex) {
-            Logger.getLogger(EstudianteServices.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     *
-     * @throws SQLException
-     */
-    public void crearTabla() throws  SQLException{
-        String sql = "CREATE TABLE IF NOT EXISTS ESTUDIANTE\n" +
-                "(\n" +
-                "  MATRICULA INTEGER PRIMARY KEY NOT NULL,\n" +
-                "  NOMBRE VARCHAR(100) NOT NULL,\n" +
-                "  APELLIDO VARCHAR(100) NOT NULL,\n" +
-                "  TELEFONO VARCHAR(25) NOT NULL,\n" +
-                "  CARRERA VARCHAR(50) NOT NULL\n" +
-                ");";
-        Connection con = getConexion();
-        Statement statement = con.createStatement();
-        statement.execute(sql);
-        statement.close();
-        con.close();
-    }
 
     public List<Estudiante> listaEstudiantes() {
         List<Estudiante> lista = new ArrayList<>();
@@ -76,7 +21,7 @@ public class EstudianteServices {
         try {
 
             String query = "select * from estudiante";
-            con = getConexion();
+            con = DataBaseServices.getInstancia().getConexion();
             //
             PreparedStatement prepareStatement = con.prepareStatement(query);
             ResultSet rs = prepareStatement.executeQuery();
@@ -115,7 +60,7 @@ public class EstudianteServices {
         try {
 
             String query = "select * from estudiante where matricula = ?";
-            con = getConexion();
+            con = DataBaseServices.getInstancia().getConexion();
             //
             PreparedStatement prepareStatement = con.prepareStatement(query);
             //Antes de ejecutar seteo los parametros.
@@ -152,7 +97,7 @@ public class EstudianteServices {
         try {
 
             String query = "insert into estudiante(matricula, nombre, apellido, telefono, carrera) values(?,?,?,?,?)";
-            con = getConexion();
+            con = DataBaseServices.getInstancia().getConexion();
             //
             PreparedStatement prepareStatement = con.prepareStatement(query);
             //Antes de ejecutar seteo los parametros.
@@ -185,7 +130,7 @@ public class EstudianteServices {
         try {
 
             String query = "update estudiante set nombre=?, apellido=?, carrera=?, telefono=? where matricula = ?";
-            con = getConexion();
+            con = DataBaseServices.getInstancia().getConexion();
             //
             PreparedStatement prepareStatement = con.prepareStatement(query);
             //Antes de ejecutar seteo los parametros.
@@ -219,7 +164,7 @@ public class EstudianteServices {
         try {
 
             String query = "delete from estudiante where matricula = ?";
-            con = getConexion();
+            con = DataBaseServices.getInstancia().getConexion();
             //
             PreparedStatement prepareStatement = con.prepareStatement(query);
 
