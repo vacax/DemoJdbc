@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 public class DataBaseServices {
 
     private static DataBaseServices instancia;
-    private String URL = "jdbc:h2:tcp://localhost/~/pruebaTep";
+    private String URL = "jdbc:h2:tcp://localhost/~/pruebaTep"; //Modo Server...
 
     /**
      *Implementando el patron Singlenton

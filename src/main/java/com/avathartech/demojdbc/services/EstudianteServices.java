@@ -17,11 +17,11 @@ public class EstudianteServices {
 
     public List<Estudiante> listaEstudiantes() {
         List<Estudiante> lista = new ArrayList<>();
-        Connection con = null;
+        Connection con = null; //objeto conexion.
         try {
 
             String query = "select * from estudiante";
-            con = DataBaseServices.getInstancia().getConexion();
+            con = DataBaseServices.getInstancia().getConexion(); //referencia a la conexion.
             //
             PreparedStatement prepareStatement = con.prepareStatement(query);
             ResultSet rs = prepareStatement.executeQuery();
