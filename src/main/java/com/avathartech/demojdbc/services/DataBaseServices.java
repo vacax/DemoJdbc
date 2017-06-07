@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Clase con patrón Singleton
  * Created by vacax on 27/05/16.
  */
 public class DataBaseServices {
@@ -15,7 +16,7 @@ public class DataBaseServices {
     private String URL = "jdbc:h2:tcp://localhost/~/pruebaTep"; //Modo Server...
 
     /**
-     *Implementando el patron Singlenton
+     *Implementando el patron Singleton
      */
     private  DataBaseServices(){
         registrarDriver();

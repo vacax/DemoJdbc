@@ -58,7 +58,7 @@ public class EstudianteServices {
         Estudiante est = null;
         Connection con = null;
         try {
-
+            //utilizando los comodines (?)...
             String query = "select * from estudiante where matricula = ?";
             con = DataBaseServices.getInstancia().getConexion();
             //
