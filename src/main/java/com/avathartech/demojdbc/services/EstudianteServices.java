@@ -14,13 +14,16 @@ import java.util.logging.Logger;
  */
 public class EstudianteServices {
 
-
+    /**
+     * Listado de los estudiantes.
+     * @return
+     */
     public List<Estudiante> listaEstudiantes() {
         List<Estudiante> lista = new ArrayList<>();
         Connection con = null; //objeto conexion.
         try {
-
-            String query = "select * from estudiante";
+            //
+            String query = "select * from estudiante ";
             con = DataBaseServices.getInstancia().getConexion(); //referencia a la conexion.
             //
             PreparedStatement prepareStatement = con.prepareStatement(query);
@@ -50,7 +53,7 @@ public class EstudianteServices {
     }
 
     /**
-     *
+     * Retorna un estudiante dado su matricula
      * @param matricula
      * @return
      */
@@ -90,6 +93,11 @@ public class EstudianteServices {
         return est;
     }
 
+    /**
+     * 
+     * @param est
+     * @return
+     */
     public boolean crearEstudiante(Estudiante est){
         boolean ok =false;
 

@@ -28,7 +28,7 @@ public class Main {
 
         //Insertando
         Estudiante insertar = new Estudiante();
-        insertar.setMatricula(20011136);
+        insertar.setMatricula(20011137);
         insertar.setNombre("Carlos");
         insertar.setApellido("Camacho");
         insertar.setTelefono("849-220-6409");
@@ -55,7 +55,7 @@ public class Main {
         estudianteServices.actualizarEstudiante(insertar);
 
         //Eleminando...
-        estudianteServices.borrarEstudiante(insertar.getMatricula());
+        //estudianteServices.borrarEstudiante(insertar.getMatricula());
 
         //Parando el servicio
         BootStrapServices.stopDb();
