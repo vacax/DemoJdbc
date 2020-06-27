@@ -11,12 +11,14 @@ import java.sql.Statement;
  */
 public class BootStrapServices {
 
+    private static Server server;
+
     /**
      *
      * @throws SQLException
      */
     public static void startDb() throws SQLException {
-        Server.createTcpServer("-tcpPort", "9092", "-tcpAllowOthers").start();
+        server = Server.createTcpServer("-tcpPort", "9092", "-tcpAllowOthers", "-ifNotExists").start();
     }
 
     /**
@@ -24,7 +26,7 @@ public class BootStrapServices {
      * @throws SQLException
      */
     public static void stopDb() throws SQLException {
-        Server.shutdownTcpServer("tcp://localhost:9092", "", true, true);
+        server.shutdown();
     }
 
 
