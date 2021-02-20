@@ -23,7 +23,7 @@ public class EstudianteServices {
         Connection con = null; //objeto conexion.
         try {
             //
-            String query = "select * from estudiante ";
+            String query = "select * from estudiante";
             con = DataBaseServices.getInstancia().getConexion(); //referencia a la conexion.
             //
             PreparedStatement prepareStatement = con.prepareStatement(query);

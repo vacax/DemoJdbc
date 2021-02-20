@@ -17,8 +17,12 @@ public class BootStrapServices {
      *
      * @throws SQLException
      */
-    public static void startDb() throws SQLException {
-        server = Server.createTcpServer("-tcpPort", "9092", "-tcpAllowOthers", "-ifNotExists").start();
+    public static void startDb()  {
+        try {
+            server = Server.createTcpServer("-tcpPort", "9092", "-tcpAllowOthers", "-ifNotExists").start();
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
     }
 
     /**
@@ -26,7 +30,9 @@ public class BootStrapServices {
      * @throws SQLException
      */
     public static void stopDb() throws SQLException {
-        server.shutdown();
+        if(server!=null) {
+            server.stop();
+        }
     }
 
 
