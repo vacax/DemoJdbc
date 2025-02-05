@@ -6,7 +6,11 @@ plugins {
 group 'com.avathartech'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
+//sourceCompatibility = 1.8
+
+java {
+    sourceCompatibility = '21'
+}
 
 mainClassName = "com.avathartech.demojdbc.main.Main"
 
