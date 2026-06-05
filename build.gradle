@@ -12,8 +12,9 @@ java {
     sourceCompatibility = '21'
 }
 
-mainClassName = "com.avathartech.demojdbc.main.Main"
-
+application {
+    mainClass = "com.avathartech.demojdbc.main.Main"
+}
 repositories {
     mavenCentral()
 }
