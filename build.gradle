@@ -6,21 +6,26 @@ plugins {
 group 'com.avathartech'
 version '1.0-SNAPSHOT'
 
-//sourceCompatibility = 1.8
-
 java {
-    sourceCompatibility = '21'
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
 }
 
 application {
     mainClass = "com.avathartech.demojdbc.main.Main"
 }
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation platform('org.junit:junit-bom:5.11.4')
     testImplementation 'org.junit.jupiter:junit-jupiter'
-    implementation 'com.h2database:h2:2.1.214'
+    implementation 'com.h2database:h2:2.3.232'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
 }
